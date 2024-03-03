@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<link rel="icon" href="images/Logo.png">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="styles/project.css">
+<link rel="stylesheet" href="file:///C:/Users/EZZAROUALY/Documents/Files/WebApp/Tableau-de-bord/public/fontawesome-free-6.2.0-web/css/all.css">
+  <title>نظام إيصال المجوهراتي</title>
+</head>
+<body class="slide-down">
+  <h2><img src="images/Logo copy.png" width="50" alt="Main logo"></h2>
+  <h1>نظام الإيصال</h1>
+  <small style="text-align: center; display: flex; align-items: center; justify-content: center; margin: 10px;">مجوهرات عائشة</small>
+
+  <form id="receipt-form">
+    <div class="addingClient">
+      <label for="client-name">اسم العميل:</label>
+      <input type="text" id="client-name" required><br><br>
+
+      <button id="add-client-btn" type="submit" onclick="addClient()">إضافة عميل</button>
+    </div>
+
+    <div id="service-form" class="slide-down">
+     <div>
+      <label for="service-type">نوع الخدمة</label>
+      <select id="service-type" required>
+        <option selected value="">اختر الخدمة</option>
+        <option value="إصلاح">إصلاح</option>
+        <option value="تنظيف">تنظيف</option>
+        <option value="تركيب الأحجار">تركيب الأحجار</option>
+        <option value="تشليل بالذهب">تشليل بالذهب</option>
+        <option value="تشليل بالفضة">تشليل بالفضة</option>
+        <option value="خدمة">خدمة (صنع)</option>
+        <option value="تعديل القياس">تعديل القياس</option>
+        <option value="كتابة اسم">كتابة اسم</option>
+        <option value="آخر">آخر</option>
+      </select>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <small style="font-size: xx-small; color: rgb(72, 72, 72); margin-top: 20px;">أي تفاصيل إضافية حول الخدمة يمكنك إضافتها يدويا</small>
+      
+      </div>
+      
+     </div>
+<input style="display: none; margin-block: 10px;" placeholder="اكتب الخدمة بشكل مختصر (3 كلمات على الأكثر)" type="text" id="otherServicesInput">
+
+      <label for="metal-type">نوع المعدن:</label>
+      <select id="metal-type" required>
+        <option value="">اختر نوع المعدن</option>
+        <option value="ذهب">ذهب</option>
+        <option value="فضة">فضة</option>
+        <option value="آخر">آخر</option>
+      </select><br><br>
+
+      <label for="product-type">نوع المنتج:</label>
+      <select id="product-type" required>
+        <option value="">اختر نوع المنتج</option>
+        <option value="خاتم">خاتم</option>
+        <option value="حلقات">حلقات</option>
+        <option value="سلسلة">سلسلة</option>
+        <option value="تعليقة">تعليقة</option>
+        <option value="خلخال">خلخال</option>
+        <option value="مقفل">مقفل</option>
+        <option value="سوار">سوار</option>
+      </select><br><br>
+
+     <div class="d-flex">
+     <div class="input">
+      <label for="weight">الوزن (جم):</label>
+      <input type="number" min="1" id="weight" required><br><br>
+     </div>
+
+     <div class="input" style="padding: 0;">
+      <label for="custom-price">السعر المخصص:</label>
+      <input type="number" min="1" id="custom-price" required><br><br>
+
+     </div>
+     </div>
+
+     <div>
+      <button type="button" onclick="addService()">إضافة الخدمة</button>
+     </div>
+        <table id="confirmation-table" class="confirmation-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>نوع الخدمة</th>
+              <th>نوع المعدن</th>
+              <th>نوع المنتج</th>
+              <th>الوزن</th>
+              <th>السعر</th>
+              <th>رقم الفاتورة</th>
+              <th>التوقيت</th>
+            </tr>
+          </thead>
+          <tbody id="confirmation-table-body">
+            <!-- Rows will be dynamically added here -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">المجموع</td>
+              <td id="total-amount" colspan="2">0</td>
+            </tr>
+          </tfoot>
+        </table>
+        <p id="service-count">عدد الخدمات: <span id="service-count-number">0</span></p>
+        
+        <button id="confirm-services-button" onclick="confirmServices()" style="display: none;">تأكيد جميع الخدمات</button>
+
+    </div>
+    
+  </form>
+  <div style="background-color: #009a9aab; width: 100%; border-radius: 30px; padding: 5px ; margin-top: 20px; color: rgb(255, 255, 255);">
+    <marquee direction="right">هام: نخبركم أن خاصية حذف العميل عن طريق زر الحذف تواجه مشاكل تقنية قد تؤثر على قائمة عملائكم، نرجو منكم عدم استخدامها إلى حين إصلاح العطب، ونذكركم بأهمية التأكد من معلمومات زبائنكم قبل تأكيد أي عملية  </marquee>
+  </div>
+  <div id="clients-table-container">
+    <h1>جدول العمليات</h1>
+    <div>
+      <label for="search-input">البحث عن زبون</label>
+    <div class="d-flex search-form">
+      <div class="d-flex">
+        <input type="text" name="" id="search-input" placeholder="رقم الفاتورة">
+      <button id="search-button" onclick="searchClients()"><i class="fas fa-search"></i> <!-- Search icon -->
+      </button>
+      </div>
+     <div class="d-flex searchStatut">
+      <button class="status-button" data-status="all" style="background-color: rgb(0, 58, 69);">الكل</button>
+  <button class="status-button" data-status="غير مكتملة">غير مكتملة</button>
+  <button class="status-button" data-status="في طور الإنجاز">في طور الإنجاز</button>
+  <button class="status-button" data-status="مكتملة">مكتملة</button>
+  <button class="status-button" data-status="تسلمه الزبون">تسلمه الزبون</button>
+     </div>
+    </div>
+    </div>
+    <table id="clients-table" class="table">
+      <thead>
+        <tr>
+          <th>اسم العميل</th>
+          <th>رقم الفاتورة</th>
+          <th>السعر</th>
+          <th>التاريخ</th>
+          <th>الخدمات</th>
+          <th>حالة الخدمات</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody id="client-services-tbody">
+      </tbody>
+    </table>
+  </div>
+  
+  <div>
+    <div id="bill-container" class="slide-down">
+      <div class="storeInfo" >
+        <img src="images/Logo.png copy.png" width="40" style="margin-bottom: 10px;" alt="logo of d">
+        <h1 class="store-title">مجوهرات عائشــة</h1>
+        <p class="store-address">شارع عبد الرحمن الثالث، مرتيل، 93150</p>
+        <p class="store-tel">الهاتف : 06.50.77.24.09</p>
+      </div>
+  
+      <div class="receipt">
+        <div class="receiptInfo" style="font-size: small;">
+          <strong><h3 style="margin-bottom: 10px;">فاتورة الإيصال</h3></strong>
+          <p style="text-align: right;">اسم العميل:  <span id="bill-client-name"></span></p>
+          <p style="text-align: right;">الـــــتـــاريخ:  <span id="bill-date" class="bill-info"></span></p>
+          <p style="text-align: right;">رمز الفاتورة:  <span id="bill-code"></span></p>
+        </div>
+  
+        <table class="bill-table">
+          <thead>
+            <tr>
+              <th>نوع الخدمة</th>
+              <th>نوع المعدن</th>
+              <th>نوع المنتج</th>
+              <th>الوزن (جم)</th>
+              <th>السعر (درهم)</th>
+            </tr>
+          </thead>
+          <tbody id="bill-items"></tbody>
+          <tfoot>
+            <tr>
+            </tr>
+          </tfoot>
+        </table>
+  
+        <div style="color: white; background-color: black; padding: 05px 0 ;  border-radius: 40px; text-align: center;">
+          <span class="bill-total" style="margin-top: 50px;">الإجمالي:</span>
+          <strong id="bill-total-amount"></strong>
+      </div>
+      
+        <div style="margin-bottom: 10px; text-align: right;">
+          <small>تنبيه :</strong><small style="font-size: smaller;">يحمل هذا الوصل المعلومات الأساسية بشأن الخدمة المُقدمة لكم، لذلك نعلمكم أن ضياعه قد يعرقل تسلمكم لبضاعتكم، نرجو منكم الاحتفاظ به في مكان آمن والتقاط صورة له في حالة الضياع</small>
+        </div>
+        <button id="print-button" class="print-button" style="display: flex;" type="button" onclick="printBill()">طباعة الفاتورة</button>
+
+      </div>
+    </div>
+    <div id="bill-container" class="slide-down" style="display: none;">
+      <div id="service-description-container" class="slide-down">
+        <div id="service-description">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <small style="font-size: xx-small; color: rgb(164, 164, 164);">مجوهرات عائشة ... 0650772409 ... شارع عبد الرحمن الثالث - مرتيل</small>
+          
+          </div>
+            <h2>وصف الخدمة</h2>
+            <div class="receiptInfo">
+              <p>اسم العميل: <span id="service-client-name"></span></p>
+              <p>رمز الفاتورة: <span id="service-bill-code"></span></p>
+          </div>
+            <table class="service-description-table">
+              <thead>
+                <th>المنتج</th>
+                <th> الخدمة</th>
+                <th>الـــــوصـــف</th>
+              </thead>
+              <tbody>
+                <td style="padding: 15%; border-color: 1px black;"></td>
+                <td style="padding: 15%; border-color: 1px black;"></td>
+                <td style="padding: 15%; border-color: 1px black;"></td>
+              </tbody>
+            </table>
+            <strong style="font-size: xx-small;">تنبيه:</strong>
+            <small style="font-size: xx-small;">يجب على الصائغ كتابة اسم المنتوج، نوع الخدمة ووصفها الكامل ويضعها مع المنتوج حتى يسهل على الصائغ خدمتها وإعادتها، كما نذكر الصائغ أن عليه إعادة بطاقة وصف الخدمة مع المنتوج بعد إصلاحه، لتسهيل وتنظيم الخدمات لدينا...</small>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+
+
+<small style="font-size: xx-small; color: rgb(136, 136, 136); text-align: right">النموذج رقم 1.0.0.1 من نظام إيصال المجوهراتي من تطوير محمد الزروالي</small>
+  <script src="js/project.js"></script>
+</body>
+</html>
