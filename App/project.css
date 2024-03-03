@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200;300;400;500;600;700;800&display=swap');
+
+body {
+  background-color: #f3f3f3;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+button {
+  padding: 10px 30px;
+  background-color: #00b3b3;
+  color: #ffffff;
+  border: none;
+  transition: .3s ease-in-out;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+* {
+  font-family: 'Changa', sans-serif;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+}
+
+*::selection {
+  background-color: #008080;
+  color: white;
+}
+
+
+h2,
+h1 {
+  color: #008080;
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.249);
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.table td:last-child {
+  padding: 5px;
+}
+
+.table td select {
+  display: inline-block;
+  width: 150px;
+  margin-right: 5px;
+}
+
+#clients-table-container{
+  margin: 30px;
+  padding: 50px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.249);
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#bill-container
+
+.table td .edit-button,
+.table td .confirm-button {
+  display: inline-block;
+}
+.edit-button{
+  margin-inline: 10px;
+  background-color: #0c0c0c;
+}
+.confirm-button{
+  margin-inline: 10px;
+  background-color: #008080;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: right;
+}
+
+input,
+select, textarea {
+  width: 100%;
+  padding: 7px 20px;
+  border: 1px solid #008080;
+  border-radius: 20px;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: border-color 0.3s ease;
+}
+
+input:hover,
+select:hover, textarea:hover {
+  border-color: #00b3b3;
+}
+
+input:focus,
+select:focus, textarea:focus {
+  outline: none;
+  border-color: #00b3b3;
+  box-shadow: 0 0 5px rgba(0, 179, 179, 0.5);
+}
+
+button:hover {
+  background-color: #004c4c;
+  padding: 10px 40px;
+}
+
+
+
+#bill-container {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bill-title {
+  color: #008080;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bill-info p {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.bill-table th,
+.bill-table td {
+  padding: 5px;
+  border: 1px solid #008080;
+  text-align: left;
+}
+
+/* Add this CSS to your styles */
+.status-button.active {
+  background-color: black;
+  color: white; /* Set the text color to white or another color that contrasts with the background */
+}
+
+
+.chart-container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+
+.bill-table th {
+  background-color: #ffffff;
+}
+
+.bill-total {
+  text-align: right;
+}
+
+@media print {
+  * {
+    font-size: small;
+  }
+  .store-title{
+    font-size: 2rem;
+    margin: 0;
+  }
+  body {
+    background: none !important;
+  }
+
+  #bill-container {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .bill-title {
+    color: #008080 !important;
+  }
+
+  .bill-info p {
+    color: #000000 !important;
+  }
+
+  .bill-table th,
+  .bill-table td {
+    color: #000000 !important;
+    border-color: #000000 !important;
+    max-height: fit-content;
+    text-align: right;
+  }
+
+  .print-button {
+    display: none !important;
+  }
+  .storeInfo{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    max-height: 10%;
+  }
+.bill-total,.bill-total-amount{
+  color: white; background-color: black; padding: 05px  ;  border-radius: 40px; text-align: center;
+}
+  .receipt {
+    text-align: center;
+    padding: 0;
+    border: 1 black;
+  }
+}
+
+.storeInfo {
+  max-height: 20%;
+  margin-bottom: 20px;
+  border: 0.2px solid;
+  padding: 2px 10px;
+}
+
+.receipt {
+  border: 1px solid;
+  padding: 2px 10px;
+}
+
+#service-form {
+  display: none;
+}
+
+#add-client-btn {
+  transition: .3s ease-in-out;
+}
+
+#add-client-btn:hover {
+  cursor: pointer;
+}
+
+#add-client-btn:focus {
+  outline: none;
+}
+
+#add-client-btn:active {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.slide-down {
+  animation: slideDown 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  margin-inline: 10px;
+}
+.receiptInfo p{
+  font-weight: bold;
+}
+.receiptInfo p span{
+  font-weight: normal;
+}
+#confirmation-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+#confirmation-container h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#confirmation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#confirmation-table th,
+#confirmation-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+#service-count,
+#total-amount {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+/* Styles for the collapsible section */
+.services-info {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Styles for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #daeefa;
+}
+
+.search-form{
+  margin-bottom: 30px;
+  margin-top: 0;
+  justify-content: space-between;
+}
+
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.searchStatut button{
+  margin-inline: 3px;
+}
+
+#search-input{
+  max-width: fit-content;
+}
+#card-container {
+  display: none;
+}
+
+
+.card-title {
+  color: #008080;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-info p {
+  margin-bottom: 10px;
+}
+
+.card-info p span {
+  font-weight: bold;
+}
+
+.card-info ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.card-info ul li:before {
+  content: '- ';
+}
+
+#print-button {
+  padding: 10px 20px;
+  background-color: #008080;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#print-button:hover {
+  background-color: #004c4c;
+}
+
+.service-description-table th,
+ .service-description-table td{
+  border: 0.1px solid;
+}
+
+.service-description-table{
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#service-description{
+  border: 0.1px solid;
+margin-top: 100px;
+padding: 20px;
+border-radius: 20px;
+}
